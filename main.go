@@ -87,7 +87,7 @@ func main() {
 	if packageName == nil || *packageName == "" {
 		*packageName = "generated"
 	}
-	os.Mkdir("model", 0777)
+	os.Mkdir("models", 0777)
 
 	apiName := "api"
 	if *rest {
@@ -114,7 +114,7 @@ func main() {
 		structName = inflection.Singular(structName)
 		structNames = append(structNames, structName)
 
-		modelInfo := dbmeta.GenerateStruct(db, tableName, structName, "model", *jsonAnnotation, *gormAnnotation, *gureguTypes)
+		modelInfo := dbmeta.GenerateStruct(db, tableName, structName, "models", *jsonAnnotation, *gormAnnotation, *gureguTypes)
 
 		var buf bytes.Buffer
 		err = t.Execute(&buf, modelInfo)
@@ -132,7 +132,7 @@ func main() {
 		if *rest {
 			//write api
 			buf.Reset()
-			err = ct.Execute(&buf, map[string]string{"PackageName": *packageName + "/model", "StructName": structName})
+			err = ct.Execute(&buf, map[string]string{"PackageName": *packageName + "/models", "StructName": structName})
 			if err != nil {
 				fmt.Println("Error in rendering controller: " + err.Error())
 				return
@@ -176,7 +176,7 @@ func getTemplate(t string) (*template.Template, error) {
 		"toSnakeCase":      snaker.CamelToSnake,
 	}
 
-	tmpl, err := template.New("model").Funcs(funcMap).Parse(t)
+	tmpl, err := template.New("models").Funcs(funcMap).Parse(t)
 
 	if err != nil {
 		return nil, err
