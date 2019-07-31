@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/smallnest/gen/dbmeta"
-	"github.com/smallnest/gen/example/model"
+	"github.com/PonyTang3/gen/dbmeta"
+	"github.com/PonyTang3/gen/example/model"
 )
 
 func configEmployeesRouter(router *httprouter.Router) {
