@@ -127,7 +127,7 @@ func main() {
 			fmt.Println("Error in formating source: " + err.Error())
 			return
 		}
-		ioutil.WriteFile(filepath.Join("model", inflection.Singular(tableName)+".go"), data, 0777)
+		ioutil.WriteFile(filepath.Join("models", inflection.Singular(tableName)+".go"), data, 0777)
 
 		if *rest {
 			//write api
